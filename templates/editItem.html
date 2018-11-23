@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Edit Record</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
+        <link href="css/bootstrap-social.css" type="text/css" rel="stylesheet"/>
+        <link href="css/style.css" type="text/css" rel="stylesheet"/>
+        <link href="js/jquery/jquery-ui.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-md-12">
+                <form class="well well-sm shade" method='post' th:object="${todoList}" th:action="@{/update}">
+
+                    <div class="row">
+                        <h2 class="white impact" th:text="${message}"><span class="glyphicon glyphicon-user"></span></h2>
+                        <div class="col-md-10 form-group">
+                            <input type="hidden" th:field="*{id}"/>
+                            <input type="hidden" th:field="*{user}"/>
+                            
+                                <input type="text" placeholder="create new todo" id="at" class="form-control" th:field="*{item}"/>
+                                <span th:if="${#fields.hasErrors('item')}" th:errors="*{item}" class="alert-danger"></span>
+                                 <!--<p th:if="${check} == true" class="alert-success">Item Updated</p>-->
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                                <input type="submit" class="btn btn-success" id="add" value="edit" />
+                        </div>
+                    </div> 
+
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

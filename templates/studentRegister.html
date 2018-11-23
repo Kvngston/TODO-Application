@@ -1,0 +1,69 @@
+<!--html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>registration</title>
+
+<!--compiled and minified css-->
+<link href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
+<link href="css/bootstrap-social.css" type="text/css" rel="stylesheet"/>
+<link href="css/style.css" type="text/css" rel="stylesheet"/>
+<link href="js/jquery/jquery-ui.css" rel="stylesheet">
+
+</head>
+<body> 
+
+<div class="col-md-12 bg"><!--background -->
+    <div class="col-md-12 bg_shade"><!--dark shade-->
+
+	<div class="col-md-12 default"><!--logo-->
+	<img src="images/hiit.png" alt="logo" id="logo"/>
+	</div>
+
+        <!--spacer-->
+         <div class="col-md-3 col-md-offset-1">
+			<p id="tip" title="Welcome!" class="white tooltip"></p>
+		</div><!-- spacer-->
+
+    <!-- the center of concentration-->
+     <div class="col-md-4 right default">
+		  <div class="col-md-12 text-center form">
+			<!--reg student-->
+     <div class="col-md-12 student panel panel-default panel_bg">
+         
+        <div class="panel-header"><!--panel header-->
+        <h2 class="white impact">Create New Patient</h2>
+        </div> 
+
+        <div class="panel-body"><!--panel body-->   
+            
+        <form method="get" th:action="@{/add}" class="student_reg_form form-group">
+            <input type="text" placeholder="Enter your name" class="form-control margin_up"/>
+            <input type="text" placeholder="Enter your age" class="form-control margin_up"/>
+            <input type="text" placeholder="Enter your Email address" class="form-control margin_up"/>
+        </form>
+</div><!--panel body end-->
+
+<div class="panel-footer panel_bg"> <!--panel footer-->
+
+      </div><!--foot end-->
+     </div><!--panel  end-->
+
+		 </div>	
+	</div>	
+      <!--dummy-->
+       <div class="col-md-3 col-md-offset-1 ">
+      </div>
+	
+  </div><!-- dark shade ends-->
+</div><!--background end -->
+
+<!--include jquery -->
+<script src="js/jquery.min.js"></script>
+
+</body>
+</html>
+
+
+
+

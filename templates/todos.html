@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+     <!-- include title -->
+    <title> Todos </title>
+
+     <!-- include css-->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
+        <link href="css/todostyle.css" type="text/css" rel="stylesheet"/>
+
+</head>
+    <body>
+        <div class="container-fluid col-md-12 row">
+
+            <!--- left panel -->
+            <div class="col-md-3 leftPanel length highlight"> 
+				
+                <span class="effect">
+
+                    <div class="col-md-12 topAlign text-center white">
+                        <h1><span class="glyphicon glyphicon-trash"></span>Planner</h1>
+                        <b>prioritize your tasks</b>
+                    </div>
+					
+                </span>
+				
+            </div>
+            <!---end of left panel -->
+	
+            <!--- right panel -->
+            <div class="col-md-1 pull-right">
+                <img class="img-responsive img-circle"  th:src="@{'/images/'+${ProfileImage.profileImage}}"/>
+                <a class="btn btn-danger col-md-12" type="submit" th:href="@{/logout}" >Log Out</a>
+            </div>
+            <div class="col-md-9 topAlign1">
+                
+                
+                <h1 id="outlook"><b> Create todo list </b></h1>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 pull-right">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center;">Time Line</th>
+                                        <th style="text-align: center;">Completed</th>
+                                        <th style="text-align: center;">Uncompleted</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td th:text="${noOfTodos}" style="text-align: center;"></td>
+                                        <td th:text="${completed}" style="text-align: center;"></td>
+                                        <td th:text="${notCompleted}" style="text-align: center;"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+                
+                <span id="error"> </span>	
+                
+                <form class="well well-sm shade" method='post' th:object="${todoList}" th:action="@{/upload}">
+
+                    <div class="row">
+                        <div class="col-md-10 form-group">
+                                <input type="text" placeholder="create new todo" id="at" class="form-control" th:field="*{item}"/>
+                                 <span th:if="${#fields.hasErrors('item')}" th:errors="*{item}" class="alert-danger"></span>
+                                 <p th:if="${check} == true" class="alert-success">List Updated</p>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                                <input type="submit" class="btn btn-success" id="add" value="add to list" />
+                        </div>
+                    </div> 
+
+                </form>
+                <hr> 
+
+                <!--- display panel -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-center" th:if="${emptyList} == true">
+                            Your Todo list is empty.... Add some Todos.......
+                        </p>
+                        <table class="table table-hover table-bordered" id="todostable" th:if="${listNotEmpty} == true">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Item</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="body">
+                                <tr th:each="todoList , iterStat:${list}">
+                                    <td th:text="${iterStat.count}"> ></td>
+                                    <td th:text="${todoList.Item    }">>  </td>
+                                    <td>
+                                        <a href="/delete/1" th:href="@{/delete__${todoList.id}__}" class="btn btn-danger bn-sm"><span class="glyphicon glyphicon-trash"> </span> delete </a>
+
+                                        <a href="/edit/1" th:href="@{/edit__${todoList.id}__}" class="btn btn-primary bn-sm"><span class="glyphicon glyphicon-pencil"> </span> edit </a>
+
+                                        <a th:if="${todoList.completed} == 0" href="/completed/1" th:href="@{/completed__${todoList.id}__}" class="btn btn-info bn-sm btn-danger"><span class="glyphicon glyphicon-user"> </span> not-completed </a>
+                                        <a th:if="${todoList.completed} == 1" href="/completed/1" th:href="@{/completed__${todoList.id}__}" class="btn btn-info bn-sm btn-danger"><span class="glyphicon glyphicon-user"> </span> completed </a>
+                                        <!-- <a href="" class="btn btn-warning bn-sm"><span class="glyphicon glyphicon-ok"> </span> mark as completed </a> -->
+
+                                    </td>
+                                </tr>
+<!--                                <tr>
+                                    <td> hello  </td>
+                                    <td> there  </td>
+                                    <td>
+                                        <a href="" class="btn btn-danger bn-sm"><span class="glyphicon glyphicon-trash"> </span> delete </a>
+
+                                        <a href="" class="btn btn-primary bn-sm"><span class="glyphicon glyphicon-pencil"> </span> edit </a>
+
+                                        <a href="#" class="btn btn-info bn-sm"><span class="glyphicon glyphicon-user"> </span> completed </a>
+
+                                         <a hre="" class="btn btn-warning bn-sm"><span class="glyphicon glyphicon-ok"> </span> mark as completed </a> 
+
+                                    </td>
+                                </tr>-->
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
+
+            </div>
+
+            <!--- footer -->
+            <div class="text-center col-md-9 topAlign2">
+                    <i>created and designed by snowcoder</i>
+            </div>
+            <!--- end of footer -->
+        </div> 
+
+        <script src="js/jquery.js"> </script>
+		 
+    </body>
+</html>		
